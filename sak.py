@@ -186,7 +186,14 @@ def match_with_key(match_this):
 
 
 def do_whatever_user_types(user_do):
-
+    print("You entered: ", str(user_do))
+    ans_cont = input("Do you wish to continue? (Yes/No) ")
+    if fuzz.ratio(ans_cont, "Yes") < fuzz.ratio(ans_cont, "No"):
+        sak_menu()
+    else:
+        next_do = match_with_key(user_do)
+        print("My best guess is you want ", next_do)
+        user_command(next_do)
 
 
 def sys_info():
@@ -235,6 +242,10 @@ def check_os():
         # sets the text colour to green
         os.system("tput setaf 2")
         print("\tYour operating system is POSIX compliant.")
+
+
+def display_advanced_options():
+    detailed_help()
 
 
 def detailed_help():
