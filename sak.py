@@ -30,6 +30,7 @@ learning tool or proof of work concept. Thank you! And have fun with the sak!
 import sys
 import os
 import platform
+import turtle
 from fuzzywuzzy import fuzz
 from fuzzywuzzy import process
 
@@ -42,8 +43,29 @@ menu_dict = {'--quit': '\t\t\t\tQuit sak',
              '--new-file': '\t\t\tCreate new file',
              '--create-directory': '\t\tCreate new folder (directory)',
              '--advanced-options': '\t\tDisplay advanced options',
+             '--draw-polygon': '\t\t\tUse a class to create and draw polygons',
              '--date': '\t\t\t\tDisplay system date',
              '--cal': '\t\t\t\tDisplay system calendar'}
+
+
+class Polygon:
+    def __init__(self, name, sides):
+        self.name = name
+        self.sides = sides
+        self.interior_angles = (self.sides - 2) * 180
+        self.angle = self.interior_angles / self.sides
+
+    def draw(self):
+        for side in range(self.sides):
+            turtle.forward(100)
+            turtle.right(180 - self.angle)
+        turtle.done()
+
+
+def draw_polygon():
+    num_sides = int(input("Enter # of sides for polygon: "))
+    my_polygon = Polygon("MyPoly", num_sides)
+    my_polygon.draw()
 
 
 # Defining main function
@@ -132,6 +154,9 @@ def user_command(do_this):
 
     elif (do_this == "advanced-options" or do_this == "--advanced-options"):
         display_advanced_options()
+
+    elif (do_this == "draw-polygon" or do_this == "--draw-polygon"):
+        draw_polygon()
 
     elif do_this == 9:
         print("Exiting application")
