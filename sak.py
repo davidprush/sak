@@ -49,23 +49,26 @@ menu_dict = {'--quit': '\t\t\t\tQuit sak',
 
 
 class Polygon:
-    def __init__(self, name, sides):
+    def __init__(self, name, sides=4, size=100):
         self.name = name
         self.sides = sides
+        self.size = size
         self.interior_angles = (self.sides - 2) * 180
         self.angle = self.interior_angles / self.sides
 
     def draw(self):
         for side in range(self.sides):
-            turtle.forward(100)
+            turtle.forward(self.size)
             turtle.right(180 - self.angle)
         turtle.done()
 
 
 def draw_polygon():
-    num_sides = int(input("Enter # of sides for polygon: "))
-    my_polygon = Polygon("MyPoly", num_sides)
+    poly_sides = int(input("Enter # of sides for your polygon: "))
+    poly_size = int(input("Enter size of your polygon: "))
+    my_polygon = Polygon("MyPoly", poly_sides, poly_size)
     my_polygon.draw()
+    turtle.clear()
 
 
 # Defining main function
